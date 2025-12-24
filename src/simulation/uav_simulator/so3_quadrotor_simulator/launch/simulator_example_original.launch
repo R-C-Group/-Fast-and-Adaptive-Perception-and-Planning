@@ -11,10 +11,8 @@
         <param name="ObstacleShape/seed" value="0"/>
 
         <!-- obs density -->
-        <!-- 静态障碍物 -->
-        <param name="map/obs_num" value="1"/>
-        <!-- 动态障碍物 -->
-        <param name="map/moving_obs_num" value="100"/>
+        <param name="map/obs_num" value="20"/>
+        <param name="map/moving_obs_num" value="50"/>
 
         <param name="ObstacleShape/lower_rad" value="0.6"/>
         <param name="ObstacleShape/upper_rad" value="1.4"/>
