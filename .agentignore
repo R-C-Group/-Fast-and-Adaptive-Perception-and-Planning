@@ -1,0 +1,28 @@
+# ROS build artifacts
+logs/
+devel/
+build/
+install/
+.catkin_tools/
+.catkin_workspace
+# Documentation and media
+fig/
+misc/
+docs/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+# C++
+*.o
+*.so
+*.a
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+# Git
+.git/

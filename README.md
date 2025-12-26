@@ -65,3 +65,10 @@ tmuxp load quick_start.yaml
 <figcaption>  
 </figcaption>
 </div>
+
+
+* 通过Antigravity打开项目（选择打开文件）：
+
+```bash
+\\wsl$\Ubuntu-20.04\home\kwanwaipang\catkin_ws\FAPP\src
+```
