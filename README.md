@@ -72,3 +72,30 @@ tmuxp load quick_start.yaml
 ```bash
 \\wsl$\Ubuntu-20.04\home\kwanwaipang\catkin_ws\FAPP\src
 ```
+
+* 添加[livox_ros_driver2](https://github.com/Livox-SDK/livox_ros_driver2/tree/master):
+* 此前需要安装[SDK](https://github.com/Livox-SDK/Livox-SDK2/blob/master/README.md)
+
+```bash
+# 安装SDK
+git clone https://github.com/Livox-SDK/Livox-SDK2.git
+cd ./Livox-SDK2/
+mkdir build
+cd build
+cmake .. && make -j
+sudo make install
+
+# 安装驱动
+# ./build.sh ROS1 #这个脚本不仅会编译，还会将 package.xml 和 CMakeLists.txt 重定向/重写为符合 ROS 1 标准的文件。
+cd /home/kwanwaipang/catkin_ws/FAPP/src/livox_ros_driver2
+# 确保使用的是 ROS1 的包描述文件
+cp -f package_ROS1.xml package.xml
+cd /home/kwanwaipang/catkin_ws/FAPP/
+# 重新初始化并编译（指定参数）
+catkin build livox_ros_driver2 -DROS_EDITION=ROS1
+
+# 然后重新执行,编译全部
+# 2. 编译整个工作空间，并确保 ROS_EDITION 参数一直有效
+catkin config --append-args -DROS_EDITION=ROS1
+catkin build
+```

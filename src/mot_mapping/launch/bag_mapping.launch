@@ -8,6 +8,7 @@
   <!-- livox_process：负责将里程计时间戳与点云对齐，解决同步问题 -->
   <node pkg="mot_mapping" type="livox_process" name="livox_process" output="screen">
     <param name="lidar_topic" value="/livox/lidar" type="string"/>
+    <param name="cloud_topic_processed" value="/livox/points_processed" type="string"/>
     <param name="odom_topic" value="/odom" type="string"/>
   </node>
         
@@ -15,7 +16,7 @@
 
   <node pkg="mot_mapping" type="mapping_node" name="mapping_node" output="screen">
     <!-- 设置里程计与点云名字 -->
-    <param name="ros/lidar_topic" value="/livox/lidar" type="string"/>
+    <param name="ros/lidar_topic" value="/livox/points_processed" type="string"/>
     <param name="ros/odom_topic" value="/odom" type="string"/>
     <param name="lidar/is_body_frame" value="true" type="bool"/>
     <param name="dbscan/core_pts" value="5" type="int"/>

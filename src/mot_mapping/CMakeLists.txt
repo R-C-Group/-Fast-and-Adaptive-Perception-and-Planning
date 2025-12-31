@@ -52,6 +52,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   obj_state_msgs
+  livox_ros_driver2
+  pcl_ros
 )
 
 catkin_package(
@@ -84,4 +86,5 @@ add_executable(livox_process
   )
 target_link_libraries(livox_process
   ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES}
   )
