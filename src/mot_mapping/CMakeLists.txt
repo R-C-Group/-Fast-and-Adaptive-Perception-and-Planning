@@ -78,3 +78,10 @@ target_link_libraries(mapping_node
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
   )
+
+add_executable(livox_process
+  src/livox_process.cpp
+  )
+target_link_libraries(livox_process
+  ${catkin_LIBRARIES}
+  )

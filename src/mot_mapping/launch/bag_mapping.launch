@@ -5,9 +5,11 @@
   <node pkg="rosbag" type="play" name="player" output="screen" 
         args="--clock /home/minghao/demo_2023-12-09-13-41-14.bag"/>
 
-  <!-- 模拟里程计发布器：在消息头中使用 'now' 来匹配仿真时间 -->
-  <node pkg="rostopic" type="rostopic" name="fake_odom" 
-        args="pub /odom nav_msgs/Odometry '{header: {stamp: now, frame_id: 'world'}, child_frame_id: 'camera_init', pose: {pose: {orientation: {w: 1.0}}}}' -r 20" />
+  <!-- livox_process：负责将里程计时间戳与点云对齐，解决同步问题 -->
+  <node pkg="mot_mapping" type="livox_process" name="livox_process" output="screen">
+    <param name="lidar_topic" value="/livox/lidar" type="string"/>
+    <param name="odom_topic" value="/odom" type="string"/>
+  </node>
         
   <!-- <node pkg="mot_mapping" type="livox_process" name="livox_process" output="screen"/> -->
 
