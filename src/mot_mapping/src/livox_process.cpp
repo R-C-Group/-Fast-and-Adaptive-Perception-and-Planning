@@ -25,6 +25,7 @@ void lidarCallback(const sensor_msgs::PointCloud2ConstPtr& msg) {
     odom.pose.pose.orientation.z = 0;
 
     odom_pub.publish(odom);
+    ROS_INFO(1.0, "Livox process: Published odom with stamp %f", odom.header.stamp.toSec());
 }
 
 int main(int argc, char** argv) {
