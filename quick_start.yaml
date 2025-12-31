@@ -12,4 +12,5 @@ windows:
           - roslaunch fapp_planner sim_test.launch
       - shell_command:
           - sleep 2
+          # - roslaunch mot_mapping bag_mapping.launch
           - roslaunch mot_mapping sim_mapping.launch

@@ -28,6 +28,7 @@ void MappingRos::init() {
   nh.param("lidar/range_z", mp_->Range[2], 1.0);
   nh.param("ros/odom_topic", mp_->odom_topic, string("/odom"));
   nh.param("ros/lidar_topic", mp_->lidar_topic, string("/livox/lidar"));
+  nh.param("lidar/is_body_frame", mp_->is_body_frame, false);
 
   cloudPub = nh.advertise<sensor_msgs::PointCloud2>("/dynamic_points", 10);
   mapPub = nh.advertise<sensor_msgs::PointCloud2>("/map_ros", 10);
@@ -39,9 +40,11 @@ void MappingRos::init() {
   std::cout << "INIT!" << std::endl;
 
   cloud_sub_.reset(
-      new message_filters::Subscriber<sensor_msgs::PointCloud2>(nh, "/map_generator/obj_cloud", 50));
+      new message_filters::Subscriber<sensor_msgs::PointCloud2>(nh, mp_->lidar_topic, 50));
   odom_sub_.reset(
-      new message_filters::Subscriber<nav_msgs::Odometry>(nh, "/drone_0_visual_slam/odom", 25));
+      new message_filters::Subscriber<nav_msgs::Odometry>(nh, mp_->odom_topic, 25));
+  
+  // 同步器
   sync_cloud_odom_.reset(new message_filters::Synchronizer<MappingRos::SyncPolicyCloudOdom>(
       MappingRos::SyncPolicyCloudOdom(100), *cloud_sub_, *odom_sub_));
   sync_cloud_odom_->registerCallback(boost::bind(&MappingRos::cloudOdomCallback, this, _1, _2));
@@ -76,7 +79,9 @@ void MappingRos::pointsBodyToWorld(const PointsPtr p_b, PointsPtr p_w) {
     p << p_b->points[i].x, 
          p_b->points[i].y, 
          p_b->points[i].z;
-    // p = md_->R * p + md_->T;
+    if (mp_->is_body_frame) {
+        p = md_->R * p + md_->T;
+    }
     if ((p - md_->T).head(2).norm() < 5.0) {
         PointType pt;
         pt.x = p[0];

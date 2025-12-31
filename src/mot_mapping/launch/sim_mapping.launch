@@ -3,6 +3,8 @@
   <!-- <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch"/> -->
         
   <node pkg="mot_mapping" type="mapping_node" name="mapping_node" output="screen">
+    <param name="ros/lidar_topic" value="/map_generator/obj_cloud" type="string"/>
+    <param name="ros/odom_topic" value="/drone_0_visual_slam/odom" type="string"/>
     <param name="dbscan/core_pts" value="3" type="int"/>
     <param name="dbscan/tolerance" value="0.4" type="double"/>
     <param name="dbscan/min_cluster" value="15" type="int"/>

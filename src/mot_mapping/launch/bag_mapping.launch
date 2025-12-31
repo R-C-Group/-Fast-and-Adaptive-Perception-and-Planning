@@ -4,10 +4,18 @@
   <param name = "use_sim_time" value = "true" />
   <node pkg="rosbag" type="play" name="player" output="screen" 
         args="--clock /home/minghao/demo_2023-12-09-13-41-14.bag"/>
+
+  <!-- 模拟里程计发布器：在消息头中使用 'now' 来匹配仿真时间 -->
+  <node pkg="rostopic" type="rostopic" name="fake_odom" 
+        args="pub /odom nav_msgs/Odometry '{header: {stamp: now, frame_id: 'world'}, child_frame_id: 'camera_init', pose: {pose: {orientation: {w: 1.0}}}}' -r 20" />
         
-  <node pkg="mot_mapping" type="livox_process" name="livox_process" output="screen"/>
+  <!-- <node pkg="mot_mapping" type="livox_process" name="livox_process" output="screen"/> -->
 
   <node pkg="mot_mapping" type="mapping_node" name="mapping_node" output="screen">
+    <!-- 设置里程计与点云名字 -->
+    <param name="ros/lidar_topic" value="/livox/lidar" type="string"/>
+    <param name="ros/odom_topic" value="/odom" type="string"/>
+    <param name="lidar/is_body_frame" value="true" type="bool"/>
     <param name="dbscan/core_pts" value="5" type="int"/>
     <param name="dbscan/tolerance" value="0.02" type="double"/>
     <param name="dbscan/min_cluster" value="10" type="int"/>

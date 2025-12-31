@@ -64,6 +64,7 @@ struct MapParam {
   // ROS Params
   std::string odom_topic;
   std::string lidar_topic;
+  bool is_body_frame;
 };
 
 struct MapData {
