@@ -135,6 +135,26 @@ void MappingRos::cloudOdomCallback(const sensor_msgs::PointCloud2ConstPtr& msg,
   vox.setLeafSize(0.1, 0.1, 0.1);
   vox.filter(*cloud_filtered);
 
+  // ************************* 修改
+  vox.setInputCloud(latest_cloud);
+  vox.setFilterFieldName("x");           
+  vox.setFilterLimits(-1*mp_->Range[0], mp_->Range[0]);         //设置在过滤字段的范围
+  vox.filter(*cloud_filtered);
+  latest_cloud = cloud_filtered;
+
+  vox.setInputCloud(latest_cloud);
+  vox.setFilterFieldName("y");           
+  vox.setFilterLimits(-1*mp_->Range[1], mp_->Range[1]);         //设置在过滤字段的范围
+  vox.filter(*cloud_filtered);
+  latest_cloud = cloud_filtered;
+
+  vox.setInputCloud(latest_cloud);
+  vox.setFilterFieldName("z");           
+  vox.setFilterLimits(-1*mp_->Range[2], mp_->Range[2]);         //设置在过滤字段的范围
+  vox.filter(*cloud_filtered);
+  //latest_cloud = cloud_filtered;
+  // *************************
+
   PointsPtr cloud_world(new Points);
   PointsPtr nonfilter_pts(new Points);
   PointsPtr PointToAdd(new Points);

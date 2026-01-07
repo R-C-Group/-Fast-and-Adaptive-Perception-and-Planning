@@ -99,3 +99,18 @@ catkin build livox_ros_driver2 -DROS_EDITION=ROS1
 catkin config --append-args -DROS_EDITION=ROS1
 catkin build
 ```
+
+# 真机测试
+
+此处选择录制rosbag,注意对应的topic情况如下:
+
+<div align="center">
+  <img src="./fig/微信图片_20260107105429.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+```bash
+source devel/setup.bash
+roslaunch mot_mapping bag_mapping.launch
+```
