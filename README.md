@@ -112,5 +112,13 @@ catkin build
 
 ```bash
 source devel/setup.bash
+# roslaunch so3_quadrotor_simulator simulator_example.launch 
 roslaunch mot_mapping bag_mapping.launch
 ```
+
+
+<div align="center">
+  <img src="./fig/微信截图_20260107113852.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>

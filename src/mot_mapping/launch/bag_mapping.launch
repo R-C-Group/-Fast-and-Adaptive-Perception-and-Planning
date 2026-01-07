@@ -6,6 +6,9 @@
   <node pkg="rosbag" type="play" name="player" output="screen" 
         args="--clock --pause /home/kwanwaipang/datasets/mid360PointCloud.bag"/>
 
+  <!-- 持续发布位于原点坐标的 /odom topic（带时间戳） -->
+  <node pkg="mot_mapping" type="static_odom_publisher" name="static_odom_publisher" output="screen"/>
+
   <!-- livox_process：负责将里程计时间戳与点云对齐，解决同步问题 -->
   <!-- <node pkg="mot_mapping" type="livox_process" name="livox_process" output="screen">
     <param name="lidar_topic" value="/livox/lidar" type="string"/>
@@ -32,8 +35,8 @@
     <param name="lidar/range_z" value="2.0" type="double"/>
   </node>
 
-  <!-- <node pkg="tf" type="static_transform_publisher" name="lio_to_world" 
-        args="1 0 0 0 0 0  /world /camera_init 10" /> -->
+  <node pkg="tf" type="static_transform_publisher" name="lio_to_world" 
+        args="1 0 0 0 0 0  /world /camera_init 10" />
   
   <node name="livox_rviz" pkg="rviz" type="rviz" respawn="true" 
         args="-d $(find mot_mapping)/launch/display_point_cloud_ROS1.rviz"/>

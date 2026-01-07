@@ -88,3 +88,10 @@ target_link_libraries(livox_process
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
   )
+
+add_executable(static_odom_publisher
+  src/static_odom_publisher.cpp
+  )
+target_link_libraries(static_odom_publisher
+  ${catkin_LIBRARIES}
+  )
